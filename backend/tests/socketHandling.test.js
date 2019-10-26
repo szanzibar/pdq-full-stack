@@ -11,7 +11,9 @@ jest.mock("axios");
 jest.mock("../utils/getEmployees");
 const getEmployees = require("../utils/getEmployees");
 getEmployees.getOneEmployee.mockImplementation(() => {
-  img: "https://cdn.pdq.com/wp-content/uploads/2017/10/default.png";
+  return {
+    img: "https://cdn.pdq.com/wp-content/uploads/2017/10/default.png"
+  };
 });
 
 const testAddress = "localhost";
@@ -66,7 +68,7 @@ test("Emitting 'echo' to the server should trigger 'Hello World' response", asyn
 });
 
 test("socket.io should respond to 'callAPI' with broadcast of 'Running' followed by 'ResultsFromAPI'", async done => {
-  expect.assertions(3);
+  expect.assertions(4);
 
   const user = {
     name: "Allison",
@@ -82,6 +84,7 @@ test("socket.io should respond to 'callAPI' with broadcast of 'Running' followed
   socket.on("ResultsFromAPI", mind => {
     expect(mind).toBeDefined();
     expect(mind.name).toBe("Allison");
+    expect(mind.img).toBeDefined();
     done();
   });
 });

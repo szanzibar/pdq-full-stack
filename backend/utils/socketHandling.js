@@ -12,7 +12,7 @@ function socketHandling(socket, io) {
     try {
       let mind = await callNecromancer();
       let employee = await getOneEmployee(mind.name);
-      mind.img = employee ? employee.img : null;
+      mind.img = employee.img ? employee.img : null;
       // console.log(JSON.stringify(mind, null, 2)); //debugging
       io.emit("ResultsFromAPI", mind);
     } catch (err) {
