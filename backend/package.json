@@ -4,22 +4,24 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "debug": "set DEBUG=myapp:* & nodemon ./bin/www",
     "test": "jest --watch"
-  },
-  "jest": {
-    "testRunner": "jest-circus/runner"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.0",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "jest": "^24.9.0",
-    "jest-circus": "^24.9.0",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "socket.io-client": "^2.3.0",
+    "supertest": "^4.0.2"
   }
 }
