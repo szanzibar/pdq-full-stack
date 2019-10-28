@@ -9,9 +9,10 @@ var indexRouter = require("./routes/index");
 var app = express();
 
 var corsOptions = {
-  origin: process.env.FRONTEND || "localhost",
+  origin: process.env.FRONTEND || "http://localhost",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
+console.log(`Allowing origins ${corsOptions.origin}`);
 
 app.use(cors(corsOptions));
 

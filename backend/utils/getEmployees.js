@@ -62,9 +62,7 @@ async function getOneEmployee(name) {
     });
   }
 
-  Object.keys(employee).forEach(key => {
-    employee[key] = employee[key].toLowerCase();
-  });
+  employee.name = employee.name.toLowerCase();
 
   return employee;
 }

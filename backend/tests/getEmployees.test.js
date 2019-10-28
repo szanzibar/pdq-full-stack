@@ -10,8 +10,8 @@ test("Should scrape pdq.com/about-us and return array of employee objects with p
 test("Should return information for single employee from pdq.com/about-us", async () => {
   const employee = await getOneEmployee("steven");
   expect(employee.name).toBe("steven");
-  expect(employee.longName).toBe("stevenv"); // The cabal API only returns first names, but if it ever gave us a first initial of the last name, we could distinguish between duplicates
-  expect(employee.img).toBe("//cdn.pdq.com/wp-content/uploads/2018/08/company_stevenv.png");
+  expect(employee.longName).toBe("StevenV"); // The cabal API only returns first names, but if it ever gave us a first initial of the last name, we could distinguish between duplicates
+  expect(employee.img).toBe("//cdn.pdq.com/wp-content/uploads/2018/08/company_StevenV.png");
 });
 
 test("Should use default image and name for unknown employee", async () => {
