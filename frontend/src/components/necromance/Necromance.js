@@ -4,7 +4,8 @@ import { Button, CircularProgress, Typography } from "@material-ui/core";
 import Results from "../results/Results";
 import "../../index.css";
 
-const endpoint = `${process.env.BACKEND || "http://localhost"}:${process.env.PORT || "3001"}`;
+const endpoint = `${process.env.BACKEND || "http://localhost"}:${process.env
+  .PORT || "3001"}`;
 
 class Necromance extends Component {
   constructor() {
@@ -60,7 +61,12 @@ class Necromance extends Component {
     return (
       <div className="main">
         <div className="buttonStyle">
-          <Button disabled={buttonDisabled} variant="contained" size="large" onClick={this.callAPI}>
+          <Button
+            disabled={buttonDisabled}
+            variant="contained"
+            size="large"
+            onClick={this.callAPI}
+          >
             Necrotize the Cabal
           </Button>
         </div>

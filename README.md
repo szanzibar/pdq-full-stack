@@ -2,6 +2,10 @@
 
 PDQ Full Stack homework assignment here: https://github.com/pdq/PDQ-Hiring-Public
 
+## To Run
+
+`docker-compose up`
+
 ## Backend
 
 - Starting point created with [Express Application Generator](https://expressjs.com/en/starter/generator.html)
@@ -20,3 +24,4 @@ PDQ Full Stack homework assignment here: https://github.com/pdq/PDQ-Hiring-Publi
 - Env variables
   - BACKEND: backend endpoint
   - BACKENDPORT: backend endpoint port
+  - PORT: port of frontend endpoint
