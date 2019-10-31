@@ -19,10 +19,13 @@ class Necromance extends Component {
     };
   }
   componentDidMount() {
+    this.handleSockets();
+  }
+  handleSockets = () => {
     const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
     socket.on("Ready", () => {
-      this.setState({ buttonDisabled: false, loading: false });
+      this.setState({ buttonDisabled: false, loading: false, response: "" });
       console.log("Ready");
     });
     socket.on("Running", () => {
@@ -32,9 +35,22 @@ class Necromance extends Component {
     socket.on("ResultsFromAPI", data =>
       this.setState({ buttonDisabled: false, loading: false, response: data })
     );
-    this.setState({ socket });
-  }
+    socket.on("disconnect", reason => {
+      this.setState({
+        buttonDisabled: true,
+        response: `Disconnected from the server: ${reason}`
+      });
+    });
+    socket.on("error", error => {
+      this.setState({
+        buttonDisabled: true,
+        response: `Error communicating with server: ${error}`
+      });
+    });
+    this.setState({ socket, response: `Connecting to server...` });
+  };
   callAPI = () => {
+    this.setState({ response: "" });
     const { socket } = this.state;
     socket.emit("callAPI");
   };

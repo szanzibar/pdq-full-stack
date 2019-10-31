@@ -24,7 +24,9 @@ test("Fail if attempting to call necromancer API more than once at a time.", asy
   expect.assertions(2);
   // Start 1st call:
   callNecromancer();
-  // globals.currentlyCaballing should be true, and 2nd call should fail:
+  // globals.currentlyCaballing should be true, and 2nd call should resolve with error:
   expect(globals.currentlyCaballing).toBe(true);
-  return expect(callNecromancer()).rejects.toMatch("Error: Attempted multiple");
+  return expect(callNecromancer()).resolves.toMatch(
+    "Error: Attempted multiple"
+  );
 });
