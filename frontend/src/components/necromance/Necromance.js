@@ -65,8 +65,11 @@ class Necromance extends Component {
       );
     } else if (response) {
       if (typeof response == "string") {
-        // response is error message
+        // response is socket.io error/warning
         body = <Typography paragraph={true}>{response}</Typography>;
+      } else if (response.error) {
+        // response is error message from server
+        body = <Typography paragraph={true}>{response.error}</Typography>;
       } else {
         body = <Results {...response}></Results>;
       }

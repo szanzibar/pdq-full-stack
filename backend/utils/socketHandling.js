@@ -11,12 +11,17 @@ function socketHandling(socket, io) {
     io.emit("Running");
     try {
       let mind = await callNecromancer();
-      let employee = await getOneEmployee(mind.name);
-      mind.img = employee.img ? employee.img : null;
-      // console.log(JSON.stringify(mind, null, 2)); //debugging
+      if (mind && !mind.error) {
+        let employee = await getOneEmployee(mind.name);
+        mind.img = employee.img ? employee.img : null;
+        // console.log(JSON.stringify(mind, null, 2)); //debugging
+      }
       io.emit("ResultsFromAPI", mind);
     } catch (err) {
-      io.emit("ResultsFromAPI", err);
+      console.log(`Error: `, err);
+      io.emit("ResultsFromAPI", {
+        error: `Internal server error. See logs for details.`
+      });
     }
   });
 

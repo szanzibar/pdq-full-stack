@@ -5,7 +5,7 @@ var globals = require("./globals"); // share globals.currentlyCaballing across m
 
 async function callNecromancer() {
   if (globals.currentlyCaballing === true) {
-    return `Error: Attempted multiple necromances at once.`;
+    return { error: `Error: Attempted multiple necromances at once.` };
   } else {
     globals.currentlyCaballing = true;
 
@@ -22,10 +22,10 @@ async function callNecromancer() {
         if (err && err.response && err.response.status === 500) {
           msg = `Got response 500, which usually means a cabal of necrotic zombies are chewing on the servers. Please try again.`;
         } else {
-          msg = `Failed to necromance: ${err}`;
+          msg = `Failed to necromance: ${JSON.stringify(err, null, 2)}`;
         }
         console.log(msg);
-        return msg;
+        return { error: msg };
       });
   }
 }

@@ -20,13 +20,24 @@ test("Successfully call necromancer", async () => {
   });
 });
 
+test("Get error message from return object if 500 response error", async () => {
+  expect.assertions(2);
+  const response = {
+    status: 500
+  };
+  axios.get.mockRejectedValue({ response });
+
+  return callNecromancer().then(data => {
+    expect(data).toHaveProperty("error");
+    expect(data.error).toMatch("Got response 500");
+  });
+});
+
 test("Fail if attempting to call necromancer API more than once at a time.", async () => {
   expect.assertions(2);
   // Start 1st call:
   callNecromancer();
   // globals.currentlyCaballing should be true, and 2nd call should resolve with error:
   expect(globals.currentlyCaballing).toBe(true);
-  return expect(callNecromancer()).resolves.toMatch(
-    "Error: Attempted multiple"
-  );
+  return expect(callNecromancer()).resolves.toHaveProperty("error");
 });
