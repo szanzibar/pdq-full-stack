@@ -1,7 +1,7 @@
 const axios = require("axios");
 const $ = require("cheerio");
 
-const url = `https://www.pdq.com/about-us/`;
+const url = `https://web.archive.org/web/20190914100118/https://www.pdq.com/about-us/`;
 
 var parsedEmployeeData = [];
 
@@ -18,12 +18,16 @@ function getEmployees() {
 
 function employeeData() {
   //Only query pdq.com/about-us once for data. After that, just return the parsedEmployeeData array
-  if (parsedEmployeeData && parsedEmployeeData.length > 0) return parsedEmployeeData;
+  if (parsedEmployeeData && parsedEmployeeData.length > 0)
+    return parsedEmployeeData;
   else {
     return new Promise(async (resolve, reject) => {
       try {
         let employeeData = await getEmployees();
-        employeeNodes = $("div.figures > figure", employeeData).each(function(i, element) {
+        employeeNodes = $("div.figures > figure", employeeData).each(function(
+          i,
+          element
+        ) {
           let longName;
           try {
             // Since the div tags containing names have duplicates, get unique long names from img url
